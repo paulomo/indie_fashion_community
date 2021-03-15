@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NonAuthRoutes } from '../../../common/route/roles/RouteEnum';
 
-export const WelcomeNavBar: React.FC = () => {
+export const NavBarPages: React.FC = () => {
   return (
     <React.Fragment>
       <div className="font-karla pb-28">

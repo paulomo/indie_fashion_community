@@ -1,17 +1,17 @@
 import React from 'react';
+import { NavBarPages } from '../components';
 import {
   WelcomeCollaboration,
   WelcomeJobList,
   WelcomeJoinUs,
   WelcomeNewLetterSignUp,
 } from './components';
-import { WelcomeNavBar } from './components';
 
 export const Welcome: React.FC = () => {
   return (
     <React.Fragment>
       <div>
-        <WelcomeNavBar />
+        <NavBarPages />
       </div>
 
       <div className="grid grid-cols-6 gap-20 px-40">

@@ -1,9 +1,4 @@
 export { WelcomeJobList } from "./WelcomeJobList";
-export { WelcomeStartButtonA } from "./WelcomeStartButtonA";
-export { WelcomeHowItWorksA } from "./WelcomeHowItWorksA";
 export { WelcomeJoinUs } from "./WelcomeJoinUs";
 export { WelcomeNewLetterSignUp } from './WelcomeNewLetterSignUp';
-export { WelcomeGuideThreeImages } from "./WelcomeGuideThreeImages";
-export { WelcomeGuideFourImages } from "./WelcomeGuideFourImages";
 export { WelcomeCollaboration } from './WelcomeCollaboration';
-export { WelcomeNavBar } from './WelcomeNavBar';
