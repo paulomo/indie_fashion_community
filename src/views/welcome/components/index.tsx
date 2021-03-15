@@ -1,13 +1,9 @@
-import { WelcomeNavBarA } from "./WelcomeNavBarA";
-
-export { WelcomeTopInfoA } from "./WelcomeTopInfoA";
+export { WelcomeJobList } from "./WelcomeJobList";
 export { WelcomeStartButtonA } from "./WelcomeStartButtonA";
 export { WelcomeHowItWorksA } from "./WelcomeHowItWorksA";
-export { WelcomeFooterA } from "./WelcomeFooterA";
-export { WelcomePricingA } from "./WelcomePricingA";
-export { WelcomeNavBarA } from "./WelcomeNavBarA";
+export { WelcomeJoinUs } from "./WelcomeJoinUs";
+export { WelcomeNewLetterSignUp } from './WelcomeNewLetterSignUp';
 export { WelcomeGuideThreeImages } from "./WelcomeGuideThreeImages";
 export { WelcomeGuideFourImages } from "./WelcomeGuideFourImages";
-export { WelcomeFeaturesInfoA } from "./WelcomeFeaturesInfoA";
-export { WelcomeSolutionA } from "./WelcomeSolutionA";
-export { WelcomeOurCommitmentA } from "./WelcomeOurCommitmentA";
+export { WelcomeCollaboration } from './WelcomeCollaboration';
+export { WelcomeNavBar } from './WelcomeNavBar';

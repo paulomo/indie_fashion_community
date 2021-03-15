@@ -5,8 +5,9 @@ import { createBrowserHistory, History } from 'history';
 import { NonAuthRoutes } from './roles/RouteEnum';
 import { RouteWithLayout } from './RouteWithLayout';
 import { PlainLayout } from '../../layout';
-import { Welcome, About, Terms } from '../../views';
+import { Welcome, About, Terms, StartHere, Collaboration } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
+import { Job } from '../../views/job/Job';
 
 
 const Routes = () => {
@@ -36,6 +37,30 @@ const Routes = () => {
           Layout={PlainLayout}
           Component={Terms}
           path={NonAuthRoutes.terms}
+          exact={true}
+          isAuthRequired={false}
+          fallback={<div> Loading... </div>}
+        />
+        <RouteWithLayout
+          Layout={PlainLayout}
+          Component={StartHere}
+          path={NonAuthRoutes.startHere}
+          exact={true}
+          isAuthRequired={false}
+          fallback={<div> Loading... </div>}
+        />
+        <RouteWithLayout
+          Layout={PlainLayout}
+          Component={Job}
+          path={NonAuthRoutes.job}
+          exact={true}
+          isAuthRequired={false}
+          fallback={<div> Loading... </div>}
+        />
+        <RouteWithLayout
+          Layout={PlainLayout}
+          Component={Collaboration}
+          path={NonAuthRoutes.collaboration}
           exact={true}
           isAuthRequired={false}
           fallback={<div> Loading... </div>}

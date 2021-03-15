@@ -9,5 +9,10 @@ export enum NonAuthRoutes {
   signUp = '/sign-up',
   forgotPassword = '/forgot-password',
   resetPassword = '/reset-password',
+  startHere = '/start-here',
+  collaboration = '/collaborations',
+  resource = '/resources',
+  job = '/jobs'
+
 }
 
