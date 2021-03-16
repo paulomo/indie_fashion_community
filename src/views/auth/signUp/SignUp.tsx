@@ -1,15 +1,10 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { FaUser, FaLock } from 'react-icons/fa';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ApiStatus } from '../../../state/appState/AppState';
-import { RootState } from '../../../state/redux/rootReducer/RootReducer';
-import { signUp } from './state/actions/signUp.actions';
-import { CompanyId } from '../../../domain/clothme.merchant/company/domain/value_object/company/CompanyId';
-import Guid from '../../../domain/clothme.shared.kernel/domain/entity/Guid';
 import { getDateWithSlashSeperator } from '../../../common/util/DateFormatted';
 import { ErrorDialogView } from '../../components/errorDialogView/ErrorDialogView';
 
@@ -20,7 +15,6 @@ export interface CompanySignUpProps {
 }
 
 export const SignUp: React.FC = () => {
-  const dispatch = useDispatch();
 
   const [companyDetail, setCompanyDetail] = useState<CompanySignUpProps>({
     companyName: '',
@@ -34,60 +28,34 @@ export const SignUp: React.FC = () => {
     setOpenErrorDialogView(false);
   };
 
-  // getting state
-  const signUpResult = useSelector((state: RootState) => state.signUpState.data);
-  const loadingStatus = useSelector((state: RootState) => state.signUpState.loadingStatus);
+  // const showLoading = () => {
+  //   return (
+  //     loadingStatus === ApiStatus.FAILED &&
+  //     setOpenErrorDialogView(true) && (
+  //       <ErrorDialogView
+  //         errorMessage={signUpResult.errorMessage}
+  //         openDialog={openErrorDialogView}
+  //         handleClose={handleClose}
+  //       />
+  //     )
+  //   );
+  // };
 
-  // useEffect(() => {
-  //   if (signUpResult.isSuccess) {
-  //   }
-  // }, [signUpResult.isSuccess]);
+  // const showErrorModal = () => {
+  //   return loadingStatus === ApiStatus.LOADING && <CircularProgress />;
+  // };
 
-  const showLoading = () => {
-    return (
-      loadingStatus === ApiStatus.FAILED &&
-      setOpenErrorDialogView(true) && (
-        <ErrorDialogView
-          errorMessage={signUpResult.errorMessage}
-          openDialog={openErrorDialogView}
-          handleClose={handleClose}
-        />
-      )
-    );
-  };
+  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
 
-  const showErrorModal = () => {
-    return loadingStatus === ApiStatus.LOADING && <CircularProgress />;
-  };
+  //   showLoading();
+  //   console.log(loadingStatus);
+  //   console.log(companyDetail);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    showLoading();
-    console.log(loadingStatus);
-    console.log(companyDetail);
-
-    dispatch(
-      signUp({
-        companyId: CompanyId.create(new Guid(companyDetail.companyName + '#' + uuidv4()))
-          .getValue()
-          .id.toString(),
-        companyName: companyDetail.companyName,
-        locationId: CompanyId.create(new Guid(companyDetail.companyName + '#' + uuidv4()))
-          .getValue()
-          .id.toString(),
-        locationName: companyDetail.companyName + '#' + 'HeadOffice',
-        email: companyDetail.companyEmail,
-        password: companyDetail.companyPassword,
-        tier: 'earlyTenantFree',
-        signUpDate: getDateWithSlashSeperator(new Date()),
-        activityDate: getDateWithSlashSeperator(new Date()),
-      })
-    );
-
-    showErrorModal();
-    console.log(loadingStatus);
-  };
+    
+  //   showErrorModal();
+  //   console.log(loadingStatus);
+  // };
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
     const elementName = event.target.value;
