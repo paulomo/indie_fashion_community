@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import { AuthFirebaseService } from '../../../networking';
 import { useHistory } from 'react-router';
 import { ErrorMessage } from "../../components/alert/ErrorMessage";
 import { FaUser, FaLock } from 'react-icons/fa';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { getDateWithSlashSeperator } from '../../../common/util/DateFormatted';
 import { ErrorDialogView } from '../../components/errorDialogView/ErrorDialogView';
 
 export interface SignUpProps {
@@ -20,19 +19,12 @@ export const SignUp: React.FC = () => {
   const history = useHistory();
   const { register, handleSubmit, errors, reset } = useForm<SignUpProps>();
   const authService = new AuthFirebaseService();
-  // const { isLoading, isError, error, mutateAsync } = useMutation(authService.signUpWithEmail);
     const mutation = useMutation<any, any>(authService.signUpWithEmail);
 
   const onSubmit = (data: any) => {
     reset();
     mutation.mutateAsync(data);
   };
-
-  // const [errorValue, setErrorValue] = useState('');
-
-  // useEffect(() => {
-  //   setErrorValue(mutation.error.message)
-  // }, [mutation.error])
 
   return (
     <React.Fragment>

@@ -10,6 +10,16 @@ export class AuthFirebaseService {
     this.signOut = this.signOut.bind(this);
   }
 
+  async updateUserAuth() {
+    const userService = new AccountFirebaseService();
+    try {
+      const signedInUser = await authService.onAuthStateChanged(user => user)
+      return signedInUser
+    } catch(error) {
+      throw new Error(error.message)
+    }
+  }
+
   async signUpWithEmail(data: any) {
     const userService = new AccountFirebaseService();
     try {
@@ -43,7 +53,7 @@ export class AuthFirebaseService {
     }
   }
 
-  async signInWithEmail(data: any): Promise<any> {
+  async signInWithEmail(data: any) {
     try {
       const response = await authService.signInWithEmailAndPassword(data.email, data.password);
       return response.user;
