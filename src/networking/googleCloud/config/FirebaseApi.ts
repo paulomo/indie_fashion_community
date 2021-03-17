@@ -50,7 +50,7 @@ export class FirebaseApi {
     await dbService
       .collection(collection)
       .doc(data.email)
-      .set({ ...data }, { merge: true });
+      .set({ email: data.email, id: data.uid }, { merge: true });
     return true;
   };
 }

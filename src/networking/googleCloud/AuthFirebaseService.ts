@@ -15,7 +15,9 @@ export class AuthFirebaseService {
     try {
       const response = await authService.createUserWithEmailAndPassword(data.email, data.password);
       try {
+        console.log(response.user);
         const user = await userService.useSaveDataToAccount(response.user);
+        console.log(user);
         return user;
       } catch (error) {
         console.log(error.message);
@@ -31,6 +33,12 @@ export class AuthFirebaseService {
       }
       if (errorCode == 'auth/account-exists-with-different-credential') {
         throw new Error('The email already exist.');
+      }
+      if (errorCode == 'auth/invalid-email') {
+        throw new Error('The email address is not valid.');
+      }
+      if (errorCode == 'auth/operation-not-allowed') {
+        throw new Error('Email signup is not enabled.');
       }
     }
   }
