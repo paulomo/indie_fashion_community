@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import "./index.css";
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
+// Create a client
+const queryClient = new QueryClient();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </QueryClientProvider>,
   document.getElementById('root')
 );
 

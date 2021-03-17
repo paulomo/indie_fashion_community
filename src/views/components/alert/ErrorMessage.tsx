@@ -1,14 +1,14 @@
 import React from "react";
 
 export interface ErrorProps {
-  message: string;
+  error: any;
 }
 
-export const ErrorMessage: React.FC<ErrorProps> = ({ message }: ErrorProps) => {
+export const ErrorMessage: React.FC<ErrorProps> = ({ error }: ErrorProps) => {
     return (
-      <div className="error-message">
+      <div className="w-full bg-red-400 text-gray-600 text-center font-semibold">
         <h1> Something went wrong </h1>  
-        <p> {message} </p>
+        <p> {error.essage} </p>
       </div>
     )
   }
