@@ -1,4 +1,4 @@
-import React, { ComponentType, lazy, LazyExoticComponent, ReactNode, Props } from "react";
+import React, { ComponentType, LazyExoticComponent, ReactNode } from "react";
 
 export interface IRoute {
     path: string;
