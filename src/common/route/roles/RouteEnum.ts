@@ -12,7 +12,8 @@ export enum NonAuthRoutes {
   startHere = '/start-here',
   collaboration = '/collaborations',
   resource = '/resources',
-  job = '/jobs'
+  job = '/jobs',
+  userAccount = '/user-account'
 
 }
 

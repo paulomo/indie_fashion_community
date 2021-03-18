@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { AccountFirebaseService } from '../../../networking';
+import { useMutation, useQueryClient } from 'react-query';
+import { AuthFirebaseService } from '../../../networking';
+import { NonAuthRoutes } from "../../../common/route/roles/RouteEnum";
 import { FaUser, FaLock } from 'react-icons/fa';
 
 export interface SignInProps {
@@ -11,9 +12,19 @@ export interface SignInProps {
 }
 
 export const SignIn: React.FC = () => {
+  const queryClient = useQueryClient();
   const { register, handleSubmit, errors, reset } = useForm<SignInProps>();
-  const accountService = new AccountFirebaseService();
-  const { isLoading, isError, error, mutateAsync } = useMutation(accountService.useSaveDataToAccount);
+  const authService = new AuthFirebaseService();
+  const { isLoading, isError, error, mutateAsync } = useMutation<any, any>(
+    authService.signInWithEmail,
+    {
+      onSuccess: (data) => {
+        console.log("Success")
+        queryClient.setQueryData('userAuthUpdate', data);
+        queryClient.invalidateQueries('userAuthUpdate');
+      }
+    }
+  );
 
   const onSubmit = (data: any) => {
     reset();
@@ -57,11 +68,13 @@ export const SignIn: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-2 mt-10 rounded text-white text-gray-100 focus:outline-none hover:bg-blue-400"
+                className="w-full py-2 mt-10 rounded bg-blue-600 text-gray-100 focus:outline-none hover:bg-blue-800"
               >
                 Sign In
               </button>
-              <div>{isError === false && (<div className="h-40 w-40 bg-red-400">121314</div>)}</div>
+              <div>
+                {isError === true && <div className="h-40 w-40 bg-red-400">1{error.message}</div>}
+              </div>
               <div>
                 <Link to="/forgot-password">
                   <h2 className="text-xs mt-2 text-gray-500 float-right mb-4">Forgot Password?</h2>
@@ -69,7 +82,7 @@ export const SignIn: React.FC = () => {
               </div>
             </div>
             <div>
-              <Link to="/sign-up">
+              <Link to={`${NonAuthRoutes.userAccount}`}>
                 <h2 className="flex flex-auto mt-4 text-xs text-gray-500 justify-center mb-4">
                   Don't Have An Account? Sign Up
                 </h2>

@@ -13,7 +13,7 @@ export class AuthFirebaseService {
   async updateUserAuth() {
     const userService = new AccountFirebaseService();
     try {
-      const signedInUser = await authService.onAuthStateChanged(user => user)
+      const signedInUser = await authService.onAuthStateChanged
       return signedInUser
     } catch(error) {
       throw new Error(error.message)
@@ -56,9 +56,10 @@ export class AuthFirebaseService {
   async signInWithEmail(data: any) {
     try {
       const response = await authService.signInWithEmailAndPassword(data.email, data.password);
-      return response.user;
+      console.log(response.user?.email)
+      return response.user?.email;
     } catch (error) {
-      return error;
+      throw new error;
     }
   }
 
