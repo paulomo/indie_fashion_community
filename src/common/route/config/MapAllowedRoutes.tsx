@@ -1,6 +1,6 @@
 import React, { Component, ComponentType, LazyExoticComponent, ReactNode } from 'react';
 import { memo } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { NotFound } from "../../../views";
 
 export interface IRoute {
@@ -12,23 +12,24 @@ export interface IRoute {
   component?: LazyExoticComponent<ComponentType<any>>;
   redirect?: string;
   private?: boolean;
-  layout?: LazyExoticComponent<ComponentType<any>>;
   permission: []
 }
 
-export interface Props {
-  routes: any[];
+export interface AllowedRoutesProps {
+  routes: IRoute[];
+  basePath: string;
   isAddNotFound: boolean;
 }
 
-function MapAllowedRoutes({ routes, isAddNotFound }: Props) {
+function MapAllowedRoutes({ routes, basePath, isAddNotFound }: AllowedRoutesProps) {
+  const match = useRouteMatch(basePath);
   return (
     <Switch>
       {routes.map((route) => {
         const { path, component, children, title, permission, ...rest } = route;
 
         return (
-          <Route {...rest} key={path} path={`${path}`}>
+          <Route {...rest} key={path} path={`${match?.path}${path}`}>
             <Component children={children} />
           </Route>
         );

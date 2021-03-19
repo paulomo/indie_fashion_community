@@ -1,6 +1,7 @@
-import React, { ReactNode, Suspense, LazyExoticComponent, ComponentType } from 'react';
+import React, { useContext, ReactNode, Suspense, LazyExoticComponent, ComponentType } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { NonAuthRoutes } from './roles/RouteEnum';
+import { AuthContext } from '../../views/auth/authState';
+import { NonAuthRoutes, Roles } from './roles';
 
 interface Props {
   Layout: React.ComponentType<any>;
@@ -28,10 +29,9 @@ const RouteWithLayout = ({
 }: Props): JSX.Element => {
   let isAuth: Boolean = true;
   const message = 'Please log in to view this page';
-  // const { isAuthed }: useContext(userContext)
-  // const { userRoles }: useContext(UserContext);
-  // const { userDuties }: useContext(UserContext);
-  // const userHasRequiredRole = requiredRoles.includes();
+  const { userId, userRoles, userEmail } = useContext(AuthContext)
+  const userHasRequiredRole = [];
+  
   // const userHasRequiredDuty = requiredRoles.includes();
   return (
     <Suspense fallback={fallback}>
