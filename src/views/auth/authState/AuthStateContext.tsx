@@ -1,46 +1,71 @@
 import React, { createContext, useState, FC, useEffect } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { AuthFirebaseService } from '../../../networking/googleCloud/AuthFirebaseService';
+import { authService } from '../../../networking/googleCloud/util/Util';
+import { AccountFirebaseService } from '../../../networking/googleCloud/AccountFirebaseService';
 
 export type TAuthContextState = {
-  user: string;
+  userEmail: string;
+  userRoles: string[];
+  userId: string;
+  addEmail: (name: string) => void;
+  addId: (id: string) => void;
+  addRoles: (roles: string[]) => void;
 };
 
 const contextDefaultValues: TAuthContextState = {
-  user: '' ,
+  userEmail: '',
+  userRoles: [],
+  userId: '',
+  addEmail: () => {},
+  addId: () => {},
+  addRoles: () => {},
 };
 
 export const AuthContext = createContext<TAuthContextState>(contextDefaultValues);
 
 const AuthProvider: FC = ({ children }) => {
-  const auth = new AuthFirebaseService();
+  const userService = new AccountFirebaseService();
+  const [userEmail, setUserEmail] = useState<string>(contextDefaultValues.userEmail);
+  const [userId, setUserId] = useState<string>(contextDefaultValues.userId);
+  const [userRoles, setUserRoles] = useState<string[]>(contextDefaultValues.userRoles);
 
-  const [user, setUser] = useState<string>(contextDefaultValues.user);
+  const addEmail = (email: string) => setUserEmail(email);
+  const addId = (id: string) => setUserId(id);
+  const addRoles = (roles: string[]) => setUserRoles(roles);
 
-  const { isLoading, data, isError, error } = useQuery('userAuthUpdate', auth.updateUserAuth);
-
-  const getUserData = () => {
-    setUser(data?.toString() as string);
-  };
+  async function getUserRecord(email: string) {
+    const userData = await userService.useLoadDataFrom(email);
+    setUserEmail(userData.email);
+    setUserId(userData.id);
+    setUserRoles(userData.roles);
+    console.log(userEmail);
+  }
 
   useEffect(() => {
-    if (isError === false) {
-      getUserData();
-      console.log(`Data information ${isLoading}`);
-      console.log(`Data informationUser ${user}`);
-    }
+    console.log('email AuthContext', userEmail);
+    let unsubscribe: { (): void; (): void };
+    const getUser = async () => {
+      unsubscribe = authService.onAuthStateChanged((user) => {
+        if (user) {
+          const { email } = user;
+          getUserRecord(email as string);
+        }
+      });
+    };
+    getUser();
+    return function cleanup() {
+      unsubscribe();
+    };
   }, []);
-
-  useEffect(() => {
-    getUserData();
-    console.log(`Data infor ${data}`);
-    console.log(`Data inforUser ${user}`);
-  }, [data]);
 
   return (
     <AuthContext.Provider
       value={{
-        user: data?.toString() as string
+        userEmail,
+        userRoles,
+        userId,
+        addEmail,
+        addId,
+        addRoles,
       }}
     >
       {children}

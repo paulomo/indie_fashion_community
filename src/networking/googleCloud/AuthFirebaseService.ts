@@ -3,6 +3,7 @@ import { AccountFirebaseService } from './AccountFirebaseService';
 
 export class AuthFirebaseService {
   constructor() {
+    // this.updateUserAuth = this.updateUserAuth.bind(this);
     this.signUpWithEmail = this.signUpWithEmail.bind(this);
     this.signInWithEmail = this.signInWithEmail.bind(this);
     this.resetPassword = this.resetPassword.bind(this);
@@ -10,15 +11,25 @@ export class AuthFirebaseService {
     this.signOut = this.signOut.bind(this);
   }
 
-  async updateUserAuth() {
-    const userService = new AccountFirebaseService();
-    try {
-      const signedInUser = await authService.onAuthStateChanged
-      return signedInUser
-    } catch(error) {
-      throw new Error(error.message)
-    }
-  }
+  // async updateUserAuth() {
+  //   const userService = new AccountFirebaseService();
+  //   const user = {};
+  //   let emailToGetData = '';
+  //   try {
+  //     const signedInUser = authService.onAuthStateChanged(user => {
+  //       if (user) {
+  //         const { email } = user;
+  //         emailToGetData = email as string;
+  //         console.log('user in auth', emailToGetData);
+  //       }
+  //     });
+  //     const userAccountData = await userService.useLoadDataFrom(emailToGetData);
+  //     console.log('user in userAccountData', userAccountData);
+  //     return signedInUser;
+  //   } catch (error) {
+  //     throw new Error(error.message);
+  //   }
+  // }
 
   async signUpWithEmail(data: any) {
     const userService = new AccountFirebaseService();
@@ -54,12 +65,18 @@ export class AuthFirebaseService {
   }
 
   async signInWithEmail(data: any) {
+    const userService = new AccountFirebaseService();
     try {
       const response = await authService.signInWithEmailAndPassword(data.email, data.password);
-      console.log(response.user?.email)
-      return response.user?.email;
+      try {
+        const user = await userService.useLoadDataFrom(data);
+        console.log(user);
+        return user;
+      } catch (error) {
+        throw new error();
+      }
     } catch (error) {
-      throw new error;
+      throw new error();
     }
   }
 

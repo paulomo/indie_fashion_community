@@ -1,7 +1,7 @@
 import React, { Component, ComponentType, LazyExoticComponent, ReactNode } from 'react';
 import { memo } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { NotFound } from "../../views";
+import { NotFound } from "../../../views";
 
 export interface IRoute {
   path: string;
@@ -17,8 +17,8 @@ export interface IRoute {
 }
 
 export interface Props {
-  routes: [IRoute];
-  isAddNotFound: string;
+  routes: any[];
+  isAddNotFound: boolean;
 }
 
 function MapAllowedRoutes({ routes, isAddNotFound }: Props) {

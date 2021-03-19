@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { AuthFirebaseService } from '../../../networking';
 import { useHistory } from 'react-router';
+import { NonAuthRoutes } from '../../../common/route/roles/RouteEnum';
 import { ErrorMessage } from "../../components/alert/ErrorMessage";
 import { FaUser, FaLock } from 'react-icons/fa';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -19,7 +20,11 @@ export const SignUp: React.FC = () => {
   const history = useHistory();
   const { register, handleSubmit, errors, reset } = useForm<SignUpProps>();
   const authService = new AuthFirebaseService();
-    const mutation = useMutation<any, any>(authService.signUpWithEmail);
+    const mutation = useMutation<any, any>(authService.signUpWithEmail, {
+      onSuccess: () => {
+        history.push(NonAuthRoutes.login);
+      }
+    });
 
   const onSubmit = (data: any) => {
     reset();

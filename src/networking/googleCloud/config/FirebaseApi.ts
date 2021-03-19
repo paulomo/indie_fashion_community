@@ -26,8 +26,8 @@ export class FirebaseApi {
    * @param id
    */
   getCollectionDoc = async (collection: any, data: any) => {
-    const doc = await dbService.collection(collection).doc(data.id).get();
-    return { ...doc.data(), id: doc.id };
+    const doc = await dbService.collection(collection).doc(data.email).get();
+    return { ...doc.data() };
   };
 
   /**
@@ -50,7 +50,7 @@ export class FirebaseApi {
     await dbService
       .collection(collection)
       .doc(data.email)
-      .set({ email: data.email, id: data.uid }, { merge: true });
+      .set({ email: data.email, id: data.uid, roles: ['GUEST', 'CUSTOMER'] }, { merge: true });
     return true;
   };
 }

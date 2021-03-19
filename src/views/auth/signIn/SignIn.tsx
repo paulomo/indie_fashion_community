@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { AuthFirebaseService } from '../../../networking';
+import { AuthContext } from "../authState"
 import { NonAuthRoutes } from "../../../common/route/roles/RouteEnum";
+import { useHistory } from 'react-router';
 import { FaUser, FaLock } from 'react-icons/fa';
 
 export interface SignInProps {
@@ -13,6 +15,8 @@ export interface SignInProps {
 
 export const SignIn: React.FC = () => {
   const queryClient = useQueryClient();
+  const history = useHistory();
+  const {addId, addEmail, addRoles} = useContext(AuthContext);
   const { register, handleSubmit, errors, reset } = useForm<SignInProps>();
   const authService = new AuthFirebaseService();
   const { isLoading, isError, error, mutateAsync } = useMutation<any, any>(
@@ -20,8 +24,11 @@ export const SignIn: React.FC = () => {
     {
       onSuccess: (data) => {
         console.log("Success")
-        queryClient.setQueryData('userAuthUpdate', data);
-        queryClient.invalidateQueries('userAuthUpdate');
+        addId(data.id);
+        addEmail(data.email);
+        addRoles(data.roles);
+        queryClient.setQueryData('authContext', data.email);
+        history.push(NonAuthRoutes.userAccount);
       }
     }
   );
