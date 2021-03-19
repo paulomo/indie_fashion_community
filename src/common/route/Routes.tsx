@@ -6,7 +6,7 @@ import { MainLayout, PlainLayout } from '../../layout';
 import { Welcome, About, Terms, StartHere, Collaboration, UserAccount } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
 import { Job } from '../../views/job/Job';
-import { AppLayout } from '../../layout/sidebar/AppLayout';
+import { AppLayout } from '../../layout/AppLayout';
 
 const Routes = () => {
   return (

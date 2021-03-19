@@ -16,7 +16,7 @@ export interface SignInProps {
 export const SignIn: React.FC = () => {
   const queryClient = useQueryClient();
   const history = useHistory();
-  const {addId, addEmail, addRoles} = useContext(AuthContext);
+  const {addIsAuth, addId, addEmail, addRoles} = useContext(AuthContext);
   const { register, handleSubmit, errors, reset } = useForm<SignInProps>();
   const authService = new AuthFirebaseService();
   const { isLoading, isError, error, mutateAsync } = useMutation<any, any>(
@@ -24,6 +24,7 @@ export const SignIn: React.FC = () => {
     {
       onSuccess: (data) => {
         console.log("Success")
+        addIsAuth(true);
         addId(data.id);
         addEmail(data.email);
         addRoles(data.roles);

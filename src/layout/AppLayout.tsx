@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { SideBar } from './SideBar';
-import { PrivateRoutesConfig } from '../../common/route/config';
+import { SideBar } from './sidebar/SideBar';
+import { PrivateRoutesConfig } from '../common/route/config';
 import { Redirect, useRouteMatch } from 'react-router';
-import { getAllowedRoutes } from '../../common/route/config/GetAllowedRoutes';
-import { AuthContext } from '../../views/auth/authState';
+import { getAllowedRoutes } from '../common/route/config/GetAllowedRoutes';
+import { AuthContext } from '../views/auth/authState';
 
 export interface LayoutProps {
   children?: any;
@@ -14,17 +14,10 @@ export const AppLayout: React.FC<LayoutProps> = ({ children }: LayoutProps) => {
   const match = useRouteMatch('/app');
   const [isSidebarOpenMobile, setIsSidebarOpenMobile] = React.useState(false);
   const [isSidebarCollapsedDesktop, setIsSidebarCollapsedDesktop] = React.useState(false);
-  // const [allowedRoutes, setAllowedRoutes] = React.useState<any[]>([]);
+  let allowedRoutes = [];
 
-  // const permitedRoutes = () => {
-  //   if (context.userId) setAllowedRoutes(getAllowedRoutes(PrivateRoutesConfig, context.userRoles));
-  //   return allowedRoutes;
-  // };
-
-    let allowedRoutes = [];
-
-    if (context.userId) allowedRoutes = getAllowedRoutes(PrivateRoutesConfig, context.userRoles);
-    else return <Redirect to="/" />;
+  if (context.userId) allowedRoutes = getAllowedRoutes(PrivateRoutesConfig, context.userRoles);
+  else return <Redirect to="/" />;
 
   function handleSidebarMobileToggle() {
     setIsSidebarOpenMobile(!isSidebarOpenMobile);

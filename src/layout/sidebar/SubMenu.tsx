@@ -15,7 +15,7 @@ export const SubMenu: React.FC<ISideBarRoutes> = (props: ISideBarRoutes) => {
   const showSubnav = () => setSubnav(!subnav);
   return (
     <React.Fragment>
-      <NavLink to="" onClick={props.subNav && showSubnav}>
+      <NavLink to={props.path} onClick={props.subNav && showSubnav}>
         <div>
           {props.icon}
           <span>{props.title}</span>

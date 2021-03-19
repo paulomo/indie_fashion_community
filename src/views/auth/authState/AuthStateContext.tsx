@@ -3,18 +3,22 @@ import { authService } from '../../../networking/googleCloud/util/Util';
 import { AccountFirebaseService } from '../../../networking/googleCloud/AccountFirebaseService';
 
 export type TAuthContextState = {
+  isAuth: boolean;
   userEmail: string;
   userRoles: string[];
   userId: string;
+  addIsAuth: (authState: boolean) => void;
   addEmail: (name: string) => void;
   addId: (id: string) => void;
   addRoles: (roles: string[]) => void;
 };
 
 const contextDefaultValues: TAuthContextState = {
+  isAuth: false,
   userEmail: '',
   userRoles: [],
   userId: '',
+  addIsAuth: () => {},
   addEmail: () => {},
   addId: () => {},
   addRoles: () => {},
@@ -24,10 +28,12 @@ export const AuthContext = createContext<TAuthContextState>(contextDefaultValues
 
 const AuthProvider: FC = ({ children }) => {
   const userService = new AccountFirebaseService();
+  const [isAuth, setIsAuth] = useState<boolean>(contextDefaultValues.isAuth);
   const [userEmail, setUserEmail] = useState<string>(contextDefaultValues.userEmail);
   const [userId, setUserId] = useState<string>(contextDefaultValues.userId);
   const [userRoles, setUserRoles] = useState<string[]>(contextDefaultValues.userRoles);
 
+  const addIsAuth = (authState: boolean) => setIsAuth(authState);
   const addEmail = (email: string) => setUserEmail(email);
   const addId = (id: string) => setUserId(id);
   const addRoles = (roles: string[]) => setUserRoles(roles);
@@ -60,9 +66,11 @@ const AuthProvider: FC = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
+        isAuth,
         userEmail,
         userRoles,
         userId,
+        addIsAuth,
         addEmail,
         addId,
         addRoles,

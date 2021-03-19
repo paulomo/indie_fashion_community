@@ -1,44 +1,8 @@
 import { NonAuthRoutes } from "../roles/RouteEnum";
-import { Welcome, About, Terms, StartHere, Collaboration, UserAccount } from '../../../views';
-import { SignUp, SignIn, ForgotPassword } from '../../../views/auth';
-import { Job } from '../../../views/job/Job';
 import { Roles } from './';
 
 
 export default [
-  {
-    // component: Welcome,
-    path: NonAuthRoutes.base,
-    title: '',
-    exact: true,
-    icon: '',
-    iconClosed: '',
-    iconOpened: '',
-  },
-  {
-    // component: SignUp,
-    path: NonAuthRoutes.signUp,
-    title: '',
-    icon: '',
-    iconClosed: '',
-    iconOpened: '',
-  },
-  {
-    // component: SignIn,
-    path: NonAuthRoutes.login,
-    title: '',
-    icon: '',
-    iconClosed: '',
-    iconOpened: '',
-  },
-  {
-    // component: ForgotPassword,
-    path: NonAuthRoutes.forgotPassword,
-    title: '',
-    icon: '',
-    iconClosed: '',
-    iconOpened: '',
-  },
   {
     // component: Collaboration,
     path: NonAuthRoutes.collaboration,
