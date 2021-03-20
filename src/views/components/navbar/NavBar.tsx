@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NonAuthRoutes } from '../../../common/route/roles/RouteEnum';
-import { DEFAULT_THEME } from "../../../theme";
-import { applyTheme } from "../../../theme/utils";
 
 export const NavBar: React.FC = () => {
-
-
   return (
     <React.Fragment>
       <div className="font-karla pb-28">

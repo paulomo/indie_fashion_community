@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { AuthFirebaseService } from '../../../networking';
 import { useHistory } from 'react-router';
 import { NonAuthRoutes } from '../../../common/route/roles/RouteEnum';
-import { ErrorMessage } from "../../components/alert/ErrorMessage";
+import { ErrorMessage } from '../../components/alert/ErrorMessage';
 import { FaUser, FaLock } from 'react-icons/fa';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -20,11 +20,11 @@ export const SignUp: React.FC = () => {
   const history = useHistory();
   const { register, handleSubmit, errors, reset } = useForm<SignUpProps>();
   const authService = new AuthFirebaseService();
-    const mutation = useMutation<any, any>(authService.signUpWithEmail, {
-      onSuccess: () => {
-        history.push(NonAuthRoutes.login);
-      }
-    });
+  const mutation = useMutation<any, any>(authService.signUpWithEmail, {
+    onSuccess: () => {
+      history.push(NonAuthRoutes.login);
+    },
+  });
 
   const onSubmit = (data: any) => {
     reset();
@@ -72,7 +72,11 @@ export const SignUp: React.FC = () => {
                 Sign Up
               </button>
             </div>
-            <div>{mutation.isError === true && <div className="h-40 w-40 bg-red-400">{mutation.error.message}</div>}</div>
+            <div>
+              {mutation.isError === true && (
+                <div className="h-40 w-40 bg-red-400">{mutation.error.message}</div>
+              )}
+            </div>
             <div>
               <Link to="/login">
                 <h2 className="flex flex-auto mt-4 text-xs text-gray-500 justify-center mb-4">

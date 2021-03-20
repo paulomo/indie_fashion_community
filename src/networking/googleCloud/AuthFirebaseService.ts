@@ -73,10 +73,10 @@ export class AuthFirebaseService {
         console.log(user);
         return user;
       } catch (error) {
-        throw new error();
+        throw new Error();
       }
     } catch (error) {
-      throw new error();
+      throw new Error();
     }
   }
 

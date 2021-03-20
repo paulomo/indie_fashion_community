@@ -6,6 +6,7 @@ import { MainLayout, PlainLayout } from '../../layout';
 import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
 import { AppLayout } from '../../layout/AppLayout';
+import { AuthLayout } from '../../layout/authLayout/AuthLayout';
 
 const Routes = () => {
   return (
@@ -81,11 +82,11 @@ const Routes = () => {
       />
 
       <RouteWithLayout
-        Layout={AppLayout}
+        Layout={AuthLayout}
         Component={UserAccount}
         path={NonAuthRoutes.userAccount}
         exact={true}
-        isAuthRequired={true}
+        isAuthRequired={false}
         fallback={<div> Loading... </div>}
       />
 
@@ -99,11 +100,11 @@ const Routes = () => {
         fallback={<div> Loading... </div>}
       />
       <RouteWithLayout
-        Layout={PlainLayout}
+        Layout={AuthLayout}
         Component={PostJob}
         path={NonAuthRoutes.postNewJob}
         exact={true}
-        isAuthRequired={false}
+        isAuthRequired={true}
         fallback={<div> Loading... </div>}
       />
     </Switch>
