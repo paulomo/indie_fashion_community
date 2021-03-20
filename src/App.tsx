@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Router } from 'react-router';
 import { createBrowserHistory, History } from 'history';
 import { Routes } from './common/route';
+import './App.css';
 
 export default function App() {
   const history: History = createBrowserHistory();

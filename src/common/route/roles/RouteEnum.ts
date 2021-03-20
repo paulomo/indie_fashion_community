@@ -13,6 +13,7 @@ export enum NonAuthRoutes {
   collaboration = '/collaborations',
   resource = '/resources',
   job = '/jobs',
+  postNewJob = '/post-a-new-job',
   userAccount = '/user-account'
 
 }

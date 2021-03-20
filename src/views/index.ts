@@ -7,6 +7,10 @@ export { Collaboration } from "./collaboration/Collaboration";
 export { UserAccount } from "./account/UserAccount";
 export { NotFound } from "./notFound/NotFound";
 
+// JOB
+export { Job } from "./job/Job";
+export { PostJob} from "./job/PostJob";
+
 
 
 

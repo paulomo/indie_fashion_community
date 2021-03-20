@@ -6,12 +6,12 @@ export const NavBarPages: React.FC = () => {
   return (
     <React.Fragment>
       <div className="font-karla pb-28">
-        <nav className="flex flex-row fixed justify-between flex-wrap p-4 px-40 w-full bg-white shadow-lg">
+        <nav className="flex flex-row fixed justify-between flex-wrap p-4 px-40 w-full bg-sec-background shadow-lg">
           <div className="flex flex-row justify-between">
             <ul className="flex flex-row justify-between gap-4 text-base font-semibold pt-3">
               <li>
                 <NavLink to={NonAuthRoutes.startHere}>
-                  <p className="">Start Here</p>
+                  <p className="text-white">Start Here</p>
                 </NavLink>
               </li>
               <li>

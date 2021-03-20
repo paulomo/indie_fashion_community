@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NonAuthRoutes } from '../../../common/route/roles/RouteEnum';
+import { DEFAULT_THEME } from "../../../theme";
+import { applyTheme } from "../../../theme/utils";
 
 export const NavBar: React.FC = () => {
+
+
   return (
     <React.Fragment>
       <div className="font-karla pb-28">
-        <nav className="flex flex-row fixed justify-between flex-wrap p-4 px-16 w-full bg-white shadow-lg">
+        <nav className="flex flex-row fixed justify-between flex-wrap p-4 px-16 w-full bg-sec-background shadow-lg">
           <div className="flex flex-row justify-between">
             <ul className="flex flex-row justify-between gap-4 text-base font-semibold pt-3">
               <li>
                 <NavLink to={NonAuthRoutes.startHere}>
-                  <p className="">Start Here</p>
+                  <p className="text-primary">Start Here</p>
                 </NavLink>
               </li>
               <li>

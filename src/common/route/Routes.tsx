@@ -3,9 +3,8 @@ import { Switch, Redirect } from 'react-router';
 import { NonAuthRoutes } from './roles/RouteEnum';
 import { RouteWithLayout } from './RouteWithLayout';
 import { MainLayout, PlainLayout } from '../../layout';
-import { Welcome, About, Terms, StartHere, Collaboration, UserAccount } from '../../views';
+import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
-import { Job } from '../../views/job/Job';
 import { AppLayout } from '../../layout/AppLayout';
 
 const Routes = () => {
@@ -45,14 +44,7 @@ const Routes = () => {
         isAuthRequired={false}
         fallback={<div> Loading... </div>}
       />
-      <RouteWithLayout
-        Layout={PlainLayout}
-        Component={Job}
-        path={NonAuthRoutes.job}
-        exact={true}
-        isAuthRequired={false}
-        fallback={<div> Loading... </div>}
-      />
+
       <RouteWithLayout
         Layout={PlainLayout}
         Component={Collaboration}
@@ -92,6 +84,24 @@ const Routes = () => {
         Layout={AppLayout}
         Component={UserAccount}
         path={NonAuthRoutes.userAccount}
+        exact={true}
+        isAuthRequired={true}
+        fallback={<div> Loading... </div>}
+      />
+
+      {/* JOB */}
+      <RouteWithLayout
+        Layout={PlainLayout}
+        Component={Job}
+        path={NonAuthRoutes.job}
+        exact={true}
+        isAuthRequired={false}
+        fallback={<div> Loading... </div>}
+      />
+      <RouteWithLayout
+        Layout={PlainLayout}
+        Component={PostJob}
+        path={NonAuthRoutes.postNewJob}
         exact={true}
         isAuthRequired={false}
         fallback={<div> Loading... </div>}

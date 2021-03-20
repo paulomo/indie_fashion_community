@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+#css 
+/src/App.css
+
 # production
 /build
 .firebase

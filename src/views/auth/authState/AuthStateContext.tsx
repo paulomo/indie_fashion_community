@@ -2,7 +2,11 @@ import React, { createContext, useState, FC, useEffect } from 'react';
 import { authService } from '../../../networking/googleCloud/util/Util';
 import { AccountFirebaseService } from '../../../networking/googleCloud/AccountFirebaseService';
 
+import { DEFAULT_THEME } from '../../../theme';
+import { applyTheme } from '../../../theme/utils';
+
 export type TAuthContextState = {
+  theme: any;
   isAuth: boolean;
   userEmail: string;
   userRoles: string[];
@@ -14,6 +18,7 @@ export type TAuthContextState = {
 };
 
 const contextDefaultValues: TAuthContextState = {
+  theme: null,
   isAuth: false,
   userEmail: '',
   userRoles: [],
@@ -27,6 +32,8 @@ const contextDefaultValues: TAuthContextState = {
 export const AuthContext = createContext<TAuthContextState>(contextDefaultValues);
 
 const AuthProvider: FC = ({ children }) => {
+  const [theme, setTheme] = useState(DEFAULT_THEME);
+
   const userService = new AccountFirebaseService();
   const [isAuth, setIsAuth] = useState<boolean>(contextDefaultValues.isAuth);
   const [userEmail, setUserEmail] = useState<string>(contextDefaultValues.userEmail);
@@ -47,6 +54,7 @@ const AuthProvider: FC = ({ children }) => {
   }
 
   useEffect(() => {
+    applyTheme(theme);
     console.log('email AuthContext', userEmail);
     let unsubscribe: { (): void; (): void };
     const getUser = async () => {
@@ -63,9 +71,11 @@ const AuthProvider: FC = ({ children }) => {
     };
   }, []);
 
+
   return (
     <AuthContext.Provider
       value={{
+        theme,
         isAuth,
         userEmail,
         userRoles,
