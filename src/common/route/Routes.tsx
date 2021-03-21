@@ -2,10 +2,9 @@ import React from 'react';
 import { Switch, Redirect } from 'react-router';
 import { NonAuthRoutes } from './roles/RouteEnum';
 import { RouteWithLayout } from './RouteWithLayout';
-import { MainLayout, PlainLayout } from '../../layout';
+import { PlainLayout } from '../../layout';
 import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
-import { AppLayout } from '../../layout/AppLayout';
 import { AuthLayout } from '../../layout/authLayout/AuthLayout';
 
 const Routes = () => {

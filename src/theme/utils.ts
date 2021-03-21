@@ -1,6 +1,5 @@
 import { themes } from './index';
 
-
 export interface ITheme {
   [key: string]: string;
 }
