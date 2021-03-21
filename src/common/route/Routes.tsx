@@ -111,7 +111,7 @@ const Routes = () => {
         Component={PostCollaboration}
         path={NonAuthRoutes.postCollaboration}
         exact={true}
-        isAuthRequired={false}
+        isAuthRequired={true}
         fallback={<div> Loading... </div>}
       />
     </Switch>
