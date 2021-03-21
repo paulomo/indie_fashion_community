@@ -6,6 +6,7 @@ import { PlainLayout } from '../../layout';
 import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
 import { AuthLayout } from '../../layout/authLayout/AuthLayout';
+import { PostCollaboration } from '../../views/collaboration/PostCollaboration';
 
 const Routes = () => {
   return (
@@ -37,23 +38,13 @@ const Routes = () => {
         fallback={<div> Loading... </div>}
       />
       <RouteWithLayout
-        Layout={PlainLayout}
+        Layout={AuthLayout}
         Component={StartHere}
         path={NonAuthRoutes.startHere}
         exact={true}
         isAuthRequired={false}
         fallback={<div> Loading... </div>}
       />
-
-      <RouteWithLayout
-        Layout={PlainLayout}
-        Component={Collaboration}
-        path={NonAuthRoutes.collaboration}
-        exact={true}
-        isAuthRequired={false}
-        fallback={<div> Loading... </div>}
-      />
-
       {/* AUTH */}
       <RouteWithLayout
         Layout={PlainLayout}
@@ -91,7 +82,7 @@ const Routes = () => {
 
       {/* JOB */}
       <RouteWithLayout
-        Layout={PlainLayout}
+        Layout={AuthLayout}
         Component={Job}
         path={NonAuthRoutes.job}
         exact={true}
@@ -104,6 +95,23 @@ const Routes = () => {
         path={NonAuthRoutes.postNewJob}
         exact={true}
         isAuthRequired={true}
+        fallback={<div> Loading... </div>}
+      />
+      {/* CoLLABORATION */}
+      <RouteWithLayout
+        Layout={AuthLayout}
+        Component={Collaboration}
+        path={NonAuthRoutes.collaboration}
+        exact={true}
+        isAuthRequired={false}
+        fallback={<div> Loading... </div>}
+      />
+      <RouteWithLayout
+        Layout={AuthLayout}
+        Component={PostCollaboration}
+        path={NonAuthRoutes.postCollaboration}
+        exact={true}
+        isAuthRequired={false}
         fallback={<div> Loading... </div>}
       />
     </Switch>

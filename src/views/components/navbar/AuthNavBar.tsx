@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { PrivateRoutesConfig } from '../../../common/route/config';
 import { AuthNavBarMenu } from './components/AuthNavBarMenu';
+import { AuthFirebaseService } from '../../../networking/googleCloud/AuthFirebaseService';
+import { AuthContext } from '../../auth/authState';
 
 export interface SidebarProps {
   tittle: string;
@@ -19,6 +21,16 @@ export const AuthNavBar: React.FC<SidebarRoutesProps> = ({
 }: SidebarRoutesProps) => {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
+  const authService = new AuthFirebaseService();
+  const { addEmail, addId, addRoles, addIsAuth } = useContext(AuthContext);
+
+  const logOut = () => {
+    addEmail('');
+    addId('');
+    addIsAuth(false);
+    addRoles([]);
+    authService.signOut();
+  };
   return (
     <React.Fragment>
       <nav>
@@ -27,6 +39,16 @@ export const AuthNavBar: React.FC<SidebarRoutesProps> = ({
           {routes.map((item, index) => {
             return <AuthNavBarMenu title={item.title} path={item.path} key={index} />;
           })}
+          <div>
+            <NavLink
+              to="/"
+              onClick={() => {
+                logOut();
+              }}
+            >
+              Sign Out
+            </NavLink>
+          </div>
         </div>
       </nav>
     </React.Fragment>

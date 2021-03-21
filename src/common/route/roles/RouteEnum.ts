@@ -11,6 +11,7 @@ export enum NonAuthRoutes {
   resetPassword = '/reset-password',
   startHere = '/start-here',
   collaboration = '/collaborations',
+  postCollaboration = '/post-new-collaboration',
   resource = '/resources',
   job = '/jobs',
   postNewJob = '/post-a-new-job',

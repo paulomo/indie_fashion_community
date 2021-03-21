@@ -13,9 +13,6 @@ export const Job: React.FC = () => {
 
   return (
     <React.Fragment>
-      <div>
-        <NavBar />
-      </div>
       <div className="pt-28"></div>
       <div>
         <button

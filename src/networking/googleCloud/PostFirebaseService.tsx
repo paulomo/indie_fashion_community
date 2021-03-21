@@ -1,4 +1,3 @@
-import { FirebaseApi } from './config/FirebaseApi';
 import { collectionConstant } from './config/DBConstant';
 import { dbService } from './util/Util';
 

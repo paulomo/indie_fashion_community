@@ -88,7 +88,12 @@ export class AuthFirebaseService {
     throw new Error('Method not implemented.');
   }
 
-  async signOut(data: any): Promise<void> {
-    throw new Error('Method not implemented.');
+  async signOut(): Promise<void> {
+    try {
+      const response = await authService.signOut();
+    } catch (error) {
+      console.log(error.message);
+      throw new Error('Error Signing Out.');
+    }
   }
 }

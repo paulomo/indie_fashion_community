@@ -5,6 +5,7 @@ import { Redirect, useRouteMatch } from 'react-router';
 import { getAllowedRoutes } from '../../common/route/config/GetAllowedRoutes';
 import { AuthContext } from '../../views/auth/authState';
 import { AuthNavBar } from '../../views/components/navbar/AuthNavBar';
+import { NavBar } from '../../views/components';
 
 export interface LayoutProps {
   children?: any;
@@ -16,13 +17,17 @@ export const AuthLayout: React.FC<LayoutProps> = ({ children }: LayoutProps) => 
   let allowedRoutes = [];
 
   if (context.userId) allowedRoutes = getAllowedRoutes(PrivateRoutesConfig, context.userRoles);
-  else return <Redirect to="/" />;
+  // else return <Redirect to="/" />;
 
   return (
     <React.Fragment>
       <div>
         <nav>
-          <AuthNavBar routes={allowedRoutes} basePath={match?.path as string} />
+          {context.userId ? (
+            <AuthNavBar routes={allowedRoutes} basePath={match?.path as string} />
+          ) : (
+            <NavBar />
+          )}
         </nav>
         <main>
           <div>{children}</div>
