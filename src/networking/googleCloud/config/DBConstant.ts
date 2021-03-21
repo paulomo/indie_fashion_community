@@ -3,5 +3,6 @@
 export const collectionConstant = {
     userAccount: 'userAccount',
     jobPost: 'jobPost',
-    collaboration: 'collaboration'
+    collaboration: 'collaboration',
+    resource: 'resourcedb',
 }

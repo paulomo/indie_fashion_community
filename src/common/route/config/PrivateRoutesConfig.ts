@@ -4,14 +4,6 @@ import { Roles } from './';
 
 export default [
   {
-    // component: Collaboration,
-    path: NonAuthRoutes.collaboration,
-    title: 'Collaborations',
-    icon: '',
-    iconClosed: '',
-    iconOpened: '',
-  },
-  {
     // component: StartHere,
     path: NonAuthRoutes.startHere,
     title: 'Start Here',
@@ -23,6 +15,23 @@ export default [
     // component: Job,
     path: NonAuthRoutes.job,
     title: 'Jobs',
+    icon: '',
+    iconClosed: '',
+    iconOpened: '',
+  },
+  {
+    // component: Collaboration,
+    path: NonAuthRoutes.collaboration,
+    title: 'Collaborations',
+    icon: '',
+    iconClosed: '',
+    iconOpened: '',
+  },
+
+  {
+    // component: Collaboration,
+    path: NonAuthRoutes.resource,
+    title: 'Resource',
     icon: '',
     iconClosed: '',
     iconOpened: '',

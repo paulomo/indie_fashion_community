@@ -18,10 +18,13 @@ export class PostFirebaseService {
     }
   }
 
-  async useReadSinglePost(data: any) {
+  async useReadSinglePost(postId: any) {
+    const id = postId.queryKey[1];
+    console.log(id);
     try {
-      const response = dbService.collection(collectionConstant.jobPost).doc(data.email).get();
-      return response;
+      const response = dbService.collection(collectionConstant.jobPost).doc(id).get();
+      console.log((await response).data());
+      return (await response).data();
     } catch (error) {
       console.log(error.message);
       throw new Error();

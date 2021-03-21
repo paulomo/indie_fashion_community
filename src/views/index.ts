@@ -10,6 +10,11 @@ export { NotFound } from "./notFound/NotFound";
 // JOB
 export { Job } from "./job/Job";
 export { PostJob} from "./job/PostJob";
+export { JobPostDetail } from "./job/jobPostDetail/JobPostDetail";
+
+// RESOURCE
+export { Resource } from "./resource/Resource";
+export { SubmitResource } from "./resource/SubmitResource";
 
 
 

@@ -3,7 +3,7 @@ import { Switch, Redirect } from 'react-router';
 import { NonAuthRoutes } from './roles/RouteEnum';
 import { RouteWithLayout } from './RouteWithLayout';
 import { PlainLayout } from '../../layout';
-import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob } from '../../views';
+import { Welcome, About, Terms, StartHere, Collaboration, UserAccount, Job, PostJob, Resource, SubmitResource, JobPostDetail } from '../../views';
 import { SignUp, SignIn, ForgotPassword } from '../../views/auth';
 import { AuthLayout } from '../../layout/authLayout/AuthLayout';
 import { PostCollaboration } from '../../views/collaboration/PostCollaboration';
@@ -97,6 +97,14 @@ const Routes = () => {
         isAuthRequired={true}
         fallback={<div> Loading... </div>}
       />
+      <RouteWithLayout
+        Layout={AuthLayout}
+        Component={JobPostDetail}
+        path={NonAuthRoutes.jobPostDetail}
+        exact={true}
+        isAuthRequired={true}
+        fallback={<div> Loading... </div>}
+      />
       {/* CoLLABORATION */}
       <RouteWithLayout
         Layout={AuthLayout}
@@ -110,6 +118,23 @@ const Routes = () => {
         Layout={AuthLayout}
         Component={PostCollaboration}
         path={NonAuthRoutes.postCollaboration}
+        exact={true}
+        isAuthRequired={true}
+        fallback={<div> Loading... </div>}
+      />
+      {/* RESOURCE */}
+      <RouteWithLayout
+        Layout={AuthLayout}
+        Component={Resource}
+        path={NonAuthRoutes.resource}
+        exact={true}
+        isAuthRequired={false}
+        fallback={<div> Loading... </div>}
+      />
+      <RouteWithLayout
+        Layout={AuthLayout}
+        Component={SubmitResource}
+        path={NonAuthRoutes.submitResource}
         exact={true}
         isAuthRequired={true}
         fallback={<div> Loading... </div>}
