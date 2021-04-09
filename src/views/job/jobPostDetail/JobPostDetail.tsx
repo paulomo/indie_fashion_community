@@ -8,7 +8,7 @@ export interface JobPostDetailProps {
 }
 
 export const JobPostDetail: React.FC = () => {
-  const { id } = useParams();
+  const { id } = useParams<{id: string}>();
   const jobPostService = new PostFirebaseService();
   const { isLoading, isError, error, data } = useQuery(
     ['getSingleJobPost', id],
